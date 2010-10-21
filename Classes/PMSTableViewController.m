@@ -32,6 +32,9 @@
 @synthesize useTitleCells;
 
 - (void)addDataSourceAtIndex:(size_t)idx {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController addDataSourceAtIndex:%ld", idx);
+#endif
     NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
     NSMutableArray * mutableSources = [[NSMutableArray alloc] initWithArray:self.dataSources];
     
@@ -40,11 +43,16 @@
     
     self.dataSources = [NSArray arrayWithArray:mutableSources];
     
+    [self.dg fetchPage:0 forSource:idx];
+    
     [mutableSources release];
     [pool0 release];
 }
 
 - (void)removeDataSourceAtIndex:(size_t)idx {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController removeDataSourceAtIndex:%ld", idx);
+#endif
     NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
     NSMutableArray * mutableSources = [[NSMutableArray alloc] initWithArray:self.dataSources];
     
@@ -60,6 +68,13 @@
       forSource:(size_t)sourceId
          onPage:(size_t)currentPage
    hasMorePages:(BOOL)morePages {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController setData:%@ forSource:%ld onPage:%ld hasMorePages:%@",
+          objects,
+          sourceId,
+          currentPage,
+          (morePages)?@"YES":@"NO");
+#endif
     if(sourceId>=[self.dataSources count]) {
         @throw [NSException exceptionWithName:INVALID_SOURCE_EXCEPTION
                                        reason:@"Your code has given an invalid data source."
@@ -80,6 +95,13 @@
       forSource:(size_t)sourceId
          onPage:(size_t)currentPage
    hasMorePages:(BOOL)morePages {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController addData:%@ forSource:%ld onPage:%ld hasMorePages:%@",
+          objects,
+          sourceId,
+          currentPage,
+          (morePages)?@"YES":@"NO");
+#endif
     if(sourceId>=[self.dataSources count]) {
         @throw [NSException exceptionWithName:INVALID_SOURCE_EXCEPTION
                                        reason:@"Your code has given an invalid data source."
@@ -99,6 +121,9 @@
 #pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)t heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ heightForRowAtIndexPath:%@", t, indexPath);
+#endif
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
                                        reason:@"tableView supplied is inconsistent with the table view this controller controls"
@@ -120,6 +145,9 @@
 }
 
 - (void)tableView:(UITableView *)t willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ willDisplayCell:%@ forRowAtIndexPath:%@", t, cell, indexPath);
+#endif
     // determine if we need to load more informations!
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
@@ -135,13 +163,16 @@
     
     PMSTableViewSource * tvs = [self.dataSources objectAtIndex:indexPath.section];
     
-    if([tvs.objects count] - indexPath.row < 3)
+    if([tvs.objects count] - indexPath.row < 3 && tvs.hasMorePages)
         [self.dg fetchPage:tvs.currentPage+1 forSource:indexPath.section];
 }
 
 #pragma mark UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ cellForRowAtIndexPath:%@", t, indexPath);
+#endif
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
                                        reason:@"tableView supplied is inconsistent with the table view this controller controls"
@@ -156,48 +187,65 @@
     
     UITableViewCell * cell = (UITableViewCell *)[t dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
+    if(!cell)
+        cell = [[[UITableViewCell alloc] init] autorelease];
+    
     if(self.useTitleCells)
-        if(indexPath.row==0)
-            return [self.dg configureCell:cell
-                         asTitleForSource:indexPath.section];
+        if(indexPath.row==0) 
+            [self.dg configureCell:cell
+                  asTitleForSource:indexPath.section];
         else
-            return [self.dg configureCell:cell
-                                  forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
-                               fromSource:indexPath.section];
+            [self.dg configureCell:cell
+                           forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
+                        fromSource:indexPath.section];
     else
-        return [self.dg configureCell:cell
-                              forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
-                           fromSource:indexPath.section];
+        [self.dg configureCell:cell
+                       forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
+                    fromSource:indexPath.section];
+    
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ numberOfRowsInSection:%ld", t, section);
+#endif
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
                                        reason:@"tableView supplied is inconsistent with the table view this controller controls"
                                      userInfo:nil];
-        return nil;
+        return 0;
     } else if (!self.dataSources||[self.dataSources count]<section) {
         @throw [NSException exceptionWithName:INVALID_TABLE_VIEW_SECTION_EXCEPTION
                                        reason:@"section supplied is inconsistent with the number of data sources."
                                      userInfo:nil];
-        return nil;
+        return 0;
     }
     
-    return [[[self.dataSources objectAtIndex:section] objects] count];
+    if(self.useTitleCells)
+        return [[[self.dataSources objectAtIndex:section] objects] count]+1;
+    else
+        return [[[self.dataSources objectAtIndex:section] objects] count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)t {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController numberOfSectionsInTableView:%@", t);
+#endif
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
                                        reason:@"tableView supplied is inconsistent with the table view this controller controls"
                                      userInfo:nil];
-        return nil;
+        return 0;
     }
     
     return [self.dataSources count];
 }
 
 - (NSString *)tableView:(UITableView *)t titleForHeaderInSection:(NSInteger)section {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ titleForHeaderInSection:%ld", t, section);
+#endif
     if(![self.dg respondsToSelector:@selector(headerTextForSource:)])
         return nil;
     else
@@ -205,6 +253,9 @@
 }
 
 - (NSString *)tableView:(UITableView *)t titleForFooterInSection:(NSInteger)section {
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@ titleForFooterInSection:%ld", t, section);
+#endif
     if(![self.dg respondsToSelector:@selector(footerTextForSource:)])
         return nil;
     else
@@ -242,7 +293,7 @@
     self = [super init];
     if(!self) return nil;
     self.objects = [NSArray array];
-    self.currentPage = 0;
+    self.currentPage = -1;
     self.hasMorePages = YES;
     return self;
 }

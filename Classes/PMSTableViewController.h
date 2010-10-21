@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PMSTableViewControllerDelegate
+@protocol PMSTableViewControllerDelegate <NSObject>
     @required
-        - (void)fetchPage:(NSUInteger)page
+        - (void)fetchPage:(NSUInteger)page                       // should cause either set or add data to be called
                 forSource:(size_t)sourceId;
         - (CGFloat)heightForCellAtRow:(NSUInteger)row
                            fromSource:(size_t)sourceId;
