@@ -10,6 +10,8 @@
 
 @implementation PMSViewController
 
+@synthesize tableView;
+@synthesize tableViewController;
 
 
 /*
@@ -29,12 +31,36 @@
 */
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    NSLog(@"PMSViewController viewDidLoad");
+    
+    [self.tableViewController addDataSourceAtIndex:0];
+    [self.tableViewController addDataSourceAtIndex:0]; // create two data sources
+    
+    NSArray * dataSources = [[NSArray alloc] initWithObjects:
+                             [NSArray arrayWithObjects:@"Object  1",
+                              @"Object  2", @"Object  3", @"Object  4",
+                              @"Object  5", @"Object  6", @"Object  7",
+                              @"Object  8", @"Object  9", @"Object 10",
+                              @"Object 11", @"Object 12", @"Object 13",
+                              @"Object 14", @"Object 15", @"Object 16",
+                              @"Object 17", @"Object 18", @"Object 19",
+                              @"Object 20", @"Object 21", @"Object 22", nil],
+                             [NSArray arrayWithObjects:@"Object  1",
+                              @"Object  2", @"Object  3", @"Object  4",
+                              @"Object  5", @"Object  6", @"Object  7",
+                              @"Object  8", @"Object  9", @"Object 10",
+                              @"Object 11", @"Object 12", @"Object 13",
+                              @"Object 14", @"Object 15", @"Object 16",
+                              @"Object 17", @"Object 18", @"Object 19",
+                              @"Object 20", @"Object 21", @"Object 22", nil],
+                             nil];
+    
     [super viewDidLoad];
 }
-*/
+
 
 
 /*

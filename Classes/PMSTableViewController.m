@@ -31,6 +31,31 @@
 @synthesize dataSources;
 @synthesize useTitleCells;
 
+- (void)addDataSourceAtIndex:(size_t)idx {
+    NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
+    NSMutableArray * mutableSources = [[NSMutableArray alloc] initWithArray:self.dataSources];
+    
+    [mutableSources insertObject:[[[PMSTableViewSource alloc] init] autorelease]
+                         atIndex:idx];
+    
+    self.dataSources = [NSArray arrayWithArray:mutableSources];
+    
+    [mutableSources release];
+    [pool0 release];
+}
+
+- (void)removeDataSourceAtIndex:(size_t)idx {
+    NSAutoreleasePool * pool0 = [[NSAutoreleasePool alloc] init];
+    NSMutableArray * mutableSources = [[NSMutableArray alloc] initWithArray:self.dataSources];
+    
+    [mutableSources removeObjectAtIndex:idx];
+    
+    self.dataSources = [NSArray arrayWithArray:mutableSources];
+    
+    [mutableSources release];
+    [pool0 release];
+}
+
 - (void)setData:(NSArray *)objects
       forSource:(size_t)sourceId
          onPage:(size_t)currentPage
@@ -217,8 +242,8 @@
     self = [super init];
     if(!self) return nil;
     self.objects = [NSArray array];
-    self.currentPage = -1;
-    self.hasMorePages = NO;
+    self.currentPage = 0;
+    self.hasMorePages = YES;
     return self;
 }
 

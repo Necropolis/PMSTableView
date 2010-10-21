@@ -41,6 +41,9 @@
 @property (readwrite, retain)           NSArray     * dataSources;
 @property (readwrite, assign)           bool          useTitleCells;
 
+- (void)addDataSourceAtIndex:(size_t)idx;
+- (void)removeDataSourceAtIndex:(size_t)idx;
+
 - (void)setData:(NSArray *)objects
       forSource:(size_t)sourceId
          onPage:(size_t)currentPage
