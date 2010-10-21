@@ -117,23 +117,73 @@
 #pragma mark UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)t cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(t != self.tableView) {
+        @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
+                                       reason:@"tableView supplied is inconsistent with the table view this controller controls"
+                                     userInfo:nil];
+        return nil;
+    } else if (!self.dataSources||[self.dataSources count]<indexPath.section) {
+        @throw [NSException exceptionWithName:INVALID_TABLE_VIEW_SECTION_EXCEPTION
+                                       reason:@"section supplied is inconsistent with the number of data sources."
+                                     userInfo:nil];
+        return nil;
+    }
     
+    UITableViewCell * cell = (UITableViewCell *)[t dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    
+    if(self.useTitleCells)
+        if(indexPath.row==0)
+            return [self.dg configureCell:cell
+                         asTitleForSource:indexPath.section];
+        else
+            return [self.dg configureCell:cell
+                                  forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
+                               fromSource:indexPath.section];
+    else
+        return [self.dg configureCell:cell
+                              forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
+                           fromSource:indexPath.section];
 }
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
+    if(t != self.tableView) {
+        @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
+                                       reason:@"tableView supplied is inconsistent with the table view this controller controls"
+                                     userInfo:nil];
+        return nil;
+    } else if (!self.dataSources||[self.dataSources count]<section) {
+        @throw [NSException exceptionWithName:INVALID_TABLE_VIEW_SECTION_EXCEPTION
+                                       reason:@"section supplied is inconsistent with the number of data sources."
+                                     userInfo:nil];
+        return nil;
+    }
     
+    return [[[self.dataSources objectAtIndex:section] objects] count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)t {
+    if(t != self.tableView) {
+        @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
+                                       reason:@"tableView supplied is inconsistent with the table view this controller controls"
+                                     userInfo:nil];
+        return nil;
+    }
     
+    return [self.dataSources count];
 }
 
 - (NSString *)tableView:(UITableView *)t titleForHeaderInSection:(NSInteger)section {
-    
+    if(![self.dg respondsToSelector:@selector(headerTextForSource:)])
+        return nil;
+    else
+        return [self.dg headerTextForSource:section];
 }
 
 - (NSString *)tableView:(UITableView *)t titleForFooterInSection:(NSInteger)section {
-    
+    if(![self.dg respondsToSelector:@selector(footerTextForSource:)])
+        return nil;
+    else
+        return [self.dg footerTextForSource:section];
 }
 
 #pragma mark NSObject

@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @protocol PMSTableViewControllerDelegate
-
-- (void)fetchPage:(NSUInteger)page
-        forSource:(size_t)sourceId;
-- (CGFloat)heightForCellAtRow:(NSUInteger)row
+    @required
+        - (void)fetchPage:(NSUInteger)page
+                forSource:(size_t)sourceId;
+        - (CGFloat)heightForCellAtRow:(NSUInteger)row
+                           fromSource:(size_t)sourceId;
+        - (void)configureCell:(UITableViewCell *)cell
+                      forData:(NSObject *)data
                    fromSource:(size_t)sourceId;
-- (CGFloat)heightForTitleCellFromSource:(size_t)sourceId;
-- (void)configureCell:(UITableViewCell *)cell
-              forData:(NSObject *)data
-           fromSource:(size_t)sourceId;
-- (void)configureCell:(UITableViewCell *)cell
-     asTitleForSource:(size_t)sourceId;
-
+    @optional
+        - (CGFloat)heightForTitleCellFromSource:(size_t)sourceId; // required if useTitleCells is YES
+        - (void)configureCell:(UITableViewCell *)cell             // required if useTitleCells is YES
+             asTitleForSource:(size_t)sourceId;
+        - (NSString *)headerTextForSource:(size_t)sourceId;
+        - (NSString *)footerTextForSource:(size_t)sourceId;
 @end
 
 /**
