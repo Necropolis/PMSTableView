@@ -185,23 +185,24 @@
         return nil;
     }
     
-    UITableViewCell * cell = (UITableViewCell *)[t dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-    
-    if(!cell)
-        cell = [[[UITableViewCell alloc] init] autorelease];
+    UITableViewCell * cell;
     
     if(self.useTitleCells)
         if(indexPath.row==0) 
-            [self.dg configureCell:cell
-                  asTitleForSource:indexPath.section];
+            cell = [self.dg configureCellAsTitleForSource:indexPath.section];
         else
-            [self.dg configureCell:cell
-                           forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
-                        fromSource:indexPath.section];
+            cell = [self.dg configureCellForData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
+                                      fromSource:indexPath.section];
     else
-        [self.dg configureCell:cell
-                       forData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
-                    fromSource:indexPath.section];
+        cell = [self.dg configureCellForData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
+                                  fromSource:indexPath.section];
+    
+    if(!cell) {
+        @throw [NSException exceptionWithName:@"Nil Cell Exception"
+                                       reason:@"You failed to return a valid UITableViewCell"
+                                     userInfo:nil];
+        cell = (UITableViewCell *)[t dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    }
     
     return cell;
 }

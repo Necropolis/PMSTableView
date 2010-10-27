@@ -131,17 +131,18 @@
     return 40.0f;
 }
 
-- (void)configureCell:(UITableViewCell *)cell
-              forData:(NSObject *)d              
-           fromSource:(size_t)sourceId {
+- (UITableViewCell *)configureCellForData:(NSObject *)d fromSource:(size_t)sourceId {
+    UITableViewCell * cell = (UITableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     [[cell textLabel] setText:((NSString *)d)];
+    return cell;
 }
 
 - (CGFloat)heightForTitleCellFromSource:(size_t)sourceId {
     return 40.0f;
 }
-- (void)configureCell:(UITableViewCell *)cell
-     asTitleForSource:(size_t)sourceId {
+
+- (UITableViewCell *)configureCellAsTitleForSource:(size_t)sourceId {
+    UITableViewCell * cell = (UITableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     switch (sourceId) {
         case 0:
             [[cell textLabel] setText:@"Source 0 Header Cell"];
@@ -150,10 +151,13 @@
             [[cell textLabel] setText:@"Source 1 Header Cell"];
             break;
     }
+    return cell;
 }
+
 - (NSString *)headerTextForSource:(size_t)sourceId {
     return [NSString stringWithFormat:@"Source %ld Header Text", sourceId];
 }
+
 - (NSString *)footerTextForSource:(size_t)sourceId {
     return [NSString stringWithFormat:@"Source %ld Footer Text", sourceId];
 }

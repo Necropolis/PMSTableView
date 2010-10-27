@@ -14,13 +14,11 @@
                 forSource:(size_t)sourceId;
         - (CGFloat)heightForCellAtRow:(NSUInteger)row
                            fromSource:(size_t)sourceId;
-        - (void)configureCell:(UITableViewCell *)cell
-                      forData:(NSObject *)data
-                   fromSource:(size_t)sourceId;
+        - (UITableViewCell *)configureCellForData:(NSObject *)data
+                                       fromSource:(size_t)sourceId;
     @optional
         - (CGFloat)heightForTitleCellFromSource:(size_t)sourceId; // required if useTitleCells is YES
-        - (void)configureCell:(UITableViewCell *)cell             // required if useTitleCells is YES
-             asTitleForSource:(size_t)sourceId;
+        - (UITableViewCell *)configureCellAsTitleForSource:(size_t)sourceId; // required if useTitleCells is YES
         - (NSString *)headerTextForSource:(size_t)sourceId;
         - (NSString *)footerTextForSource:(size_t)sourceId;
 @end
