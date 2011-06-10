@@ -185,17 +185,17 @@
         return nil;
     }
     
-    UITableViewCell * cell;
+    UITableViewCell * cell = nil;
     
     if(self.useTitleCells)
         if(indexPath.row==0) 
-            cell = [self.dg configureCellAsTitleForSource:indexPath.section];
+            cell = [self.dg configureCellAsTitleForSource:indexPath];
         else
             cell = [self.dg configureCellForData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row-1]
-                                      fromSource:indexPath.section];
+                                      fromSource:indexPath];
     else
         cell = [self.dg configureCellForData:[[[self.dataSources objectAtIndex:indexPath.section] objects] objectAtIndex:indexPath.row]
-                                  fromSource:indexPath.section];
+                                  fromSource:indexPath];
     
     if(!cell) {
         @throw [NSException exceptionWithName:@"Nil Cell Exception"
@@ -209,7 +209,7 @@
 
 - (NSInteger)tableView:(UITableView *)t numberOfRowsInSection:(NSInteger)section {
 #ifdef PMSDEBUG
-    NSLog(@"PMSTableViewController tableView:%@ numberOfRowsInSection:%ld", t, section);
+    NSLog(@"PMSTableViewController tableView:%@ numberOfRowsInSection:%d", t, section);
 #endif
     if(t != self.tableView) {
         @throw [NSException exceptionWithName:WRONG_TABLE_VIEW_EXCEPTION
@@ -245,7 +245,7 @@
 
 - (NSString *)tableView:(UITableView *)t titleForHeaderInSection:(NSInteger)section {
 #ifdef PMSDEBUG
-    NSLog(@"PMSTableViewController tableView:%@ titleForHeaderInSection:%ld", t, section);
+    NSLog(@"PMSTableViewController tableView:%@ titleForHeaderInSection:%d", t, section);
 #endif
     if(![self.dg respondsToSelector:@selector(headerTextForSource:)])
         return nil;
@@ -255,7 +255,7 @@
 
 - (NSString *)tableView:(UITableView *)t titleForFooterInSection:(NSInteger)section {
 #ifdef PMSDEBUG
-    NSLog(@"PMSTableViewController tableView:%@ titleForFooterInSection:%ld", t, section);
+    NSLog(@"PMSTableViewController tableView:%@ titleForFooterInSection:%d", t, section);
 #endif
     if(![self.dg respondsToSelector:@selector(footerTextForSource:)])
         return nil;

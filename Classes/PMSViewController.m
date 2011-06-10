@@ -131,8 +131,10 @@
     return 40.0f;
 }
 
-- (UITableViewCell *)configureCellForData:(NSObject *)d fromSource:(size_t)sourceId {
+- (UITableViewCell *)configureCellForData:(NSObject *)d fromSource:(NSIndexPath *)indexPath {
     UITableViewCell * cell = (UITableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    if(!cell)
+        cell = [[UITableViewCell alloc] initWithFrame:[self.tableView rectForRowAtIndexPath:indexPath]];
     [[cell textLabel] setText:((NSString *)d)];
     return cell;
 }
@@ -141,9 +143,11 @@
     return 40.0f;
 }
 
-- (UITableViewCell *)configureCellAsTitleForSource:(size_t)sourceId {
+- (UITableViewCell *)configureCellAsTitleForSource:(NSIndexPath *)indexPath {
     UITableViewCell * cell = (UITableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-    switch (sourceId) {
+    if(!cell)
+        cell = [[UITableViewCell alloc] initWithFrame:[self.tableView rectForRowAtIndexPath:indexPath]];
+    switch (indexPath.section) {
         case 0:
             [[cell textLabel] setText:@"Source 0 Header Cell"];
             break;
