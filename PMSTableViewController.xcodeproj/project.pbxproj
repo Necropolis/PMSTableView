@@ -12,7 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
-		2899E5220DE3E06400AC0155 /* PaginatedMultisourceTableViewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* PaginatedMultisourceTableViewControllerViewController.xib */; };
+		2899E5220DE3E06400AC0155 /* PMSTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* PMSTableViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* PMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* PMSViewController.m */; };
 		DA330126126E668900DDC9AB /* PMSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA330125126E668900DDC9AB /* PMSTableViewController.m */; };
@@ -22,16 +22,16 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* PMSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* PMSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMSAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* PaginatedMultisourceTableViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaginatedMultisourceTableViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* PMSTableViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PMSTableViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E5210DE3E06400AC0155 /* PaginatedMultisourceTableViewControllerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaginatedMultisourceTableViewControllerViewController.xib; sourceTree = "<group>"; };
+		2899E5210DE3E06400AC0155 /* PMSTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PMSTableViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28D7ACF60DDB3853001CB0EB /* PMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSViewController.h; sourceTree = "<group>"; };
 		28D7ACF70DDB3853001CB0EB /* PMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMSViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* PaginatedMultisourceTableViewController_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaginatedMultisourceTableViewController_Prefix.pch; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* PaginatedMultisourceTableViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PaginatedMultisourceTableViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* PMSTableViewController_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSTableViewController_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* PMSTableViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PMSTableViewController-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DA330124126E668900DDC9AB /* PMSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSTableViewController.h; sourceTree = "<group>"; };
 		DA330125126E668900DDC9AB /* PMSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMSTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +66,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* PaginatedMultisourceTableViewController.app */,
+				1D6058910D05DD3D006BFB54 /* PMSTableViewController.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +86,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* PaginatedMultisourceTableViewController_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* PMSTableViewController_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -95,9 +95,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2899E5210DE3E06400AC0155 /* PaginatedMultisourceTableViewControllerViewController.xib */,
+				2899E5210DE3E06400AC0155 /* PMSTableViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* PaginatedMultisourceTableViewController-Info.plist */,
+				8D1107310486CEB800E47090 /* PMSTableViewController-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* PaginatedMultisourceTableViewController */ = {
+		1D6058900D05DD3D006BFB54 /* PMSTableViewController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "PaginatedMultisourceTableViewController" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "PMSTableViewController" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -127,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = PaginatedMultisourceTableViewController;
+			name = PMSTableViewController;
 			productName = PaginatedMultisourceTableViewController;
-			productReference = 1D6058910D05DD3D006BFB54 /* PaginatedMultisourceTableViewController.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* PMSTableViewController.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +137,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PaginatedMultisourceTableViewController" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PMSTableViewController" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -148,7 +148,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* PaginatedMultisourceTableViewController */,
+				1D6058900D05DD3D006BFB54 /* PMSTableViewController */,
 			);
 		};
 /* End PBXProject section */
@@ -159,7 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				2899E5220DE3E06400AC0155 /* PaginatedMultisourceTableViewControllerViewController.xib in Resources */,
+				2899E5220DE3E06400AC0155 /* PMSTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,9 +188,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PaginatedMultisourceTableViewController_Prefix.pch;
-				INFOPLIST_FILE = "PaginatedMultisourceTableViewController-Info.plist";
-				PRODUCT_NAME = PaginatedMultisourceTableViewController;
+				GCC_PREFIX_HEADER = PMSTableViewController_Prefix.pch;
+				INFOPLIST_FILE = "PMSTableViewController-Info.plist";
+				PRODUCT_NAME = PMSTableViewController;
 			};
 			name = Debug;
 		};
@@ -200,9 +200,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PaginatedMultisourceTableViewController_Prefix.pch;
-				INFOPLIST_FILE = "PaginatedMultisourceTableViewController-Info.plist";
-				PRODUCT_NAME = PaginatedMultisourceTableViewController;
+				GCC_PREFIX_HEADER = PMSTableViewController_Prefix.pch;
+				INFOPLIST_FILE = "PMSTableViewController-Info.plist";
+				PRODUCT_NAME = PMSTableViewController;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -239,7 +239,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "PaginatedMultisourceTableViewController" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "PMSTableViewController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -248,7 +248,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PaginatedMultisourceTableViewController" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PMSTableViewController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
