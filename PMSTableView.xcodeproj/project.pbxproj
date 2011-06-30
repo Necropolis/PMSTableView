@@ -40,9 +40,9 @@
 		DAB49EDB13BCE51C00183C2C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DAB49EDD13BCE51C00183C2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DAB49EDF13BCE51C00183C2C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		DAB49EE313BCE51C00183C2C /* PMSTableView-Info.plist */ = {isa = PBXFileReference; path = "PMSTableView-Info.plist"; sourceTree = "<group>"; };
+		DAB49EE313BCE51C00183C2C /* PMSTableView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PMSTableView-Info.plist"; sourceTree = "<group>"; };
 		DAB49EE513BCE51C00183C2C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DAB49EE713BCE51C00183C2C /* PMSTableView-Prefix.pch */ = {isa = PBXFileReference; path = "PMSTableView-Prefix.pch"; sourceTree = "<group>"; };
+		DAB49EE713BCE51C00183C2C /* PMSTableView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PMSTableView-Prefix.pch"; sourceTree = "<group>"; };
 		DAB49EE813BCE51C00183C2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAB49EEA13BCE51C00183C2C /* PMSTableAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMSTableAppDelegate.h; sourceTree = "<group>"; };
 		DAB49EEB13BCE51C00183C2C /* PMSTableAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PMSTableAppDelegate.m; sourceTree = "<group>"; };
@@ -51,9 +51,9 @@
 		DAB49EF113BCE51C00183C2C /* PMSTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PMSTableViewController.m; sourceTree = "<group>"; };
 		DAB49EF413BCE51C00183C2C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PMSTableViewController.xib; sourceTree = "<group>"; };
 		DAB49EFB13BCE51D00183C2C /* PMSTableViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMSTableViewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAB49F0313BCE51D00183C2C /* PMSTableViewTests-Info.plist */ = {isa = PBXFileReference; path = "PMSTableViewTests-Info.plist"; sourceTree = "<group>"; };
+		DAB49F0313BCE51D00183C2C /* PMSTableViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PMSTableViewTests-Info.plist"; sourceTree = "<group>"; };
 		DAB49F0513BCE51D00183C2C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DAB49F0713BCE51D00183C2C /* PMSTableViewTests-Prefix.pch */ = {isa = PBXFileReference; path = "PMSTableViewTests-Prefix.pch"; sourceTree = "<group>"; };
+		DAB49F0713BCE51D00183C2C /* PMSTableViewTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PMSTableViewTests-Prefix.pch"; sourceTree = "<group>"; };
 		DAB49F0813BCE51D00183C2C /* PMSTableTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMSTableTests.h; sourceTree = "<group>"; };
 		DAB49F0A13BCE51D00183C2C /* PMSTableTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PMSTableTests.m; sourceTree = "<group>"; };
 		DAB49F1413BCE5C200183C2C /* PMSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMSTableView.h; sourceTree = "<group>"; };
