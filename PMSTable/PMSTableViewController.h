@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PMSTableViewController : UIViewController {
-    
+#import "PMSTableView.h"
+#import "PMSTableViewDelegate.h"
+
+@interface PMSTableViewController : UIViewController <PMSTableViewDelegate> {
+    PMSTableView *tableView;
+    NSArray * data;
 }
+
+@property (nonatomic, retain) IBOutlet PMSTableView *tableView;
+@property (nonatomic, retain) NSArray * data;
 
 @end
