@@ -46,7 +46,7 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    
+    NSLog(@"TODO: Set the data!");
 }
 
 - (void)addData:(NSArray *)objects
@@ -54,13 +54,13 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    
+    NSLog(@"TODO: Add the data!");
 }
 
 - (void)setHasMorePages:(bool)morePages
               forSource:(NSUInteger)sourceId
 {
-    
+    NSLog(@"TODO: Set the flag!");
 }
 
 #pragma mark NSCoding
