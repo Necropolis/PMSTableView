@@ -12,8 +12,10 @@
 
 /**
  * Contract that code must conform to in order to make full use of a PMSTableView.
+ *
+ * Some methods from `UITableViewDelegate` may not be called.
  */
-@protocol PMSTableViewDelegate <NSObject>
+@protocol PMSTableViewDelegate <UITableViewDelegate>
 
 @required
 
@@ -40,8 +42,6 @@
  * This call will not be sent in an asynchronous dispatch queue.
  *
  * @warning *Note:* The behavior of PMSTableView is undefined should this return `nil`.
- * 
- * *Note:* This call will not be sent in an asyncronous dispatch queue.
  *
  * @param tableView The PMSTableView that this call originated from.
  * @param data The data as retreived earlier by tableView:fetchPage:forSource:.
@@ -58,8 +58,6 @@
  *
  * PMSTableView will check to see whether the receiver implements tableView:cellAsTitleForSource: before sending this message.
  *
- * @warning *Note:* This call will not be sent in an asynchrnous dispatch queue.
- *
  * @see tableView:cellAsTitleForSource:
  *
  * @param tableView The PMSTableView that this call originated from.
@@ -72,8 +70,6 @@
  * Should tableView use loading cells? If YES, then you need to implement tableView:cellAsLoadingIndicatorForSource:.
  *
  * PMSTableView will check to see whether the receiver implements tableView:cellAsLoadingIndicatorForSource: before sending this message.
- * 
- * @warning *Note:* This call will not be sent in an asynchronous dispatch queue.
  *  
  * @see tableView:cellAsLoadingIndicatorForSource:
  * 
@@ -94,8 +90,6 @@
  * 
  * Request from PMSTableView for a title cell, which is a normal cell that is configured as a kind of section header. Normal text-based section headers do not necessarily look good in all styling situations, so it is often necessary to design your own title cells.
  * 
- * @warning *Note:* This call will not be sent in an asynchronous dispatch queue.
- * 
  * @param tableView The PMSTableView that this call originated from.
  * @param sourceId The source for which the title cell will be displayed on.
  *
@@ -112,8 +106,6 @@
  * Request for the section header text to use for a section in the PMSTableView.
  *
  * Section header text is not a full cell. It's a funky little label that floats above the section no matter where you are in the section, and will disappear when the section is no longer visible.
- *
- * @warning *Note:* This call will not be sent in an asynchronous dispatch queue.
  * 
  * @param tableView The PMSTableView that this call originated from.
  * @param sourceId The source for which this text will become the section header for.
@@ -127,8 +119,6 @@
  * Request for the section footer text to use for a section in the PMSTableView.
  *
  * Section footer text is not a full cell. It's a funky little label that floats below the section, and will be pushed out of view next to the section header for the following section.
- *
- * @warning *Note:* This call will not be sent in an asynchronous dispatch queue.
  *
  * @param tableView The PMSTableView that this call originated from.
  * @param sourceId The source for which this text will become the section footer for.
@@ -146,8 +136,6 @@
  * Request for a loading indicator cell to use while loading more data for a section in the PMSTableView.
  *
  * This is a really cool toy. Because you can configure this cell however you want, you can do all kinds of fun things. For instance, you could provide a determinate loading indicator instead of an indeterminate one (by hooking this up into your code called from tableView:fetchPage:forSource:) or any other number of things. I might be a bit biased, but this is wicked sick.
- *
- * @warning *Note:* This call will not be sent in an asynchronous dispatch queue.
  *
  * @param tableView The PMSTableView that this call originated from.
  * @param sourceId The source for which this loading indicator is being used while more data is being loaded.

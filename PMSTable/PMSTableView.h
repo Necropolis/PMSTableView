@@ -31,6 +31,7 @@
 @interface PMSTableView : UITableView<UITableViewDelegate> {
     IBOutlet id<PMSTableViewDelegate> dg;
     NSArray * dataSources;
+    NSInteger loadThreshold;
     bool useTitleCells;
     bool useLoadingCells;
 }
@@ -40,6 +41,10 @@
  */
 @property (readwrite, assign) IBOutlet id<PMSTableViewDelegate> dg;
 @property (readwrite, retain) NSArray * dataSources;
+/**
+ * How soon should the PMSTableView re-query for more elements?
+ */
+@property (readwrite, assign) NSInteger loadThreshold;
 
 /**
  * Insert a data source into the receiver. This is used for dynamically changing the number of sections in the `UITableView`.

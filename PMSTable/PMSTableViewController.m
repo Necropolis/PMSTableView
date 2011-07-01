@@ -113,9 +113,9 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
     // set up with some example data
     NSMutableArray * arr = [[NSMutableArray alloc] initWithCapacity:kNumberOfSections];
     NSMutableArray * brr;
-    for (size_t i=0; i < kNumberOfSections; ++i) {
+    for (NSUInteger i=0; i < kNumberOfSections; ++i) {
         brr = [[NSMutableArray alloc] initWithCapacity:kObjectsPerSection];
-        for (size_t j=0; j < kObjectsPerSection; ++j)
+        for (NSUInteger j=0; j < kObjectsPerSection; ++j)
             [brr addObject:[NSString stringWithFormat:@"Section %ld Row %ld", i+1, j+1]];
         [arr addObject:[NSArray arrayWithArray:brr]];
         [brr release];
@@ -127,6 +127,8 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
     [pool release];
     
     [super viewDidLoad];
+    
+    NSLog(@"Table View Delegate: %@", tableView.delegate);
 }
 
 
