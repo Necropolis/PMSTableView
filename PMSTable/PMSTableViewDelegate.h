@@ -13,7 +13,10 @@
 /**
  * Contract that code must conform to in order to make full use of a PMSTableView.
  *
- * Some methods from `UITableViewDelegate` may not be called.
+ * Two methods from `UITableViewDataSource` will never be called:
+ *
+ * - `tableView:cellForRowAtIndexPath:` will never be called. It will instead fire off one of three methods: tableView:cellForData:fromSource:, tableView:cellAsTitleForSource:, or tableView:cellAsLoadingIndicatorForSource:
+ * - `tableView:numberOfRowsInSection:` will never be called. PMSTableView itself handles this because it is also handling the data internally.
  */
 @protocol PMSTableViewDelegate <UITableViewDelegate, UITableViewDataSource>
 
