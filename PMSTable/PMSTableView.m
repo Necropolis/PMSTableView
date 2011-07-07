@@ -17,11 +17,13 @@
     NSArray * objects;
     NSUInteger currentPage;
     bool hasMorePages;
+    bool requestingAnotherPage;
 }
 
 @property (readwrite, retain) NSArray * objects;
 @property (readwrite, assign) NSUInteger currentPage;
 @property (readwrite, assign) bool hasMorePages;
+@property (readwrite, assign) bool requestingAnotherPage;
 
 @end
 
@@ -46,7 +48,7 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    NSLog(@"TODO: Set the data!");
+    NSLog(@"TODO: Set the data  and set requestingAnotherPage to NO!");
 }
 
 - (void)addData:(NSArray *)objects
@@ -54,13 +56,21 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    NSLog(@"TODO: Add the data!");
+    NSLog(@"TODO: Add the data and set requestingAnotherPage to NO!");
 }
 
 - (void)setHasMorePages:(bool)morePages
               forSource:(NSUInteger)sourceId
 {
-    NSLog(@"TODO: Set the flag!");
+    assert(sourceId<[dataSources count]);
+    [[dataSources objectAtIndex:sourceId] setHasMorePages:morePages];
+}
+
+- (void)setRequestingAnotherPage:(bool)requestingAnotherPage
+                       forSoruce:(NSUInteger)sourceId
+{
+    assert(sourceId<[dataSources count]);
+    [[dataSources objectAtIndex:sourceId] setRequestingAnotherPage:requestingAnotherPage];
 }
 
 #pragma mark NSCoding
@@ -114,7 +124,7 @@
     self = [super init];
     if (self) {
         super.delegate = self;
-        super.dataSource = nil;
+        super.dataSource = self;
         self.dataSources = [NSArray array];
     }
     return self;
@@ -124,6 +134,41 @@
 {
     self.dataSources = nil;
     [super dealloc];
+}
+
+#pragma mark UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    assert(tableView == self);
+    NSInteger row=indexPath.row, section=indexPath.section;
+    assert([self.dataSources count]>section);
+    
+    // is this for a title cell?
+    if (useTitleCells && row == 0)
+        return [dg tableView:self
+        cellAsTitleForSource:section];
+    
+    // is this for a loading cell?
+    if ([[dataSources objectAtIndex:section] requestingAnotherPage] && row == [self numberOfRowsInSection:section]-1)
+           return [dg tableView:self
+cellAsLoadingIndicatorForSource:section];
+    
+    // this must be for a data cell!
+    if (useTitleCells)
+        ++row; // adjust row
+    return [dg tableView:self
+             cellForData:[[[dataSources objectAtIndex:section] objects] objectAtIndex:row] fromSource:section];
+    
+    return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    assert(tableView == self);
+    return 0;
 }
 
 #pragma mark UITableViewDelegate
@@ -141,9 +186,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     assert([self.dataSources count]>section);
     // perform the logic of whether to load more data
     PMSTableViewSource * src = [dataSources objectAtIndex:section];
+    
+    // if we use loading cells, add one
+    [self beginUpdates]; {
+        
+        [self insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:section]
+                                                                                 inSection:section]]
+                    withRowAnimation:UITableViewRowAnimationTop];
+        
+    } [self endUpdates];
+    
     if ([src.objects count] - row < loadThreshold && src.hasMorePages)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^{
+                           [[dataSources objectAtIndex:section] setRequestingAnotherPage:YES];
                            [dg tableView:self
                                fetchPage:src.currentPage+1
                                forSource:section];
@@ -159,11 +215,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (id)forwardingTargetForSelector:(SEL)aSelector
 {
-    // evil evil selector forwarding on ONLY the methods from UITableViewDelegate
+    // evil evil selector forwarding on ONLY the methods from UITableViewDelegate and UITableViewDataSource
     // see http://mikeash.com/pyblog//friday-qa-2009-03-27-objective-c-message-forwarding.html
     // for why this even works
     struct objc_method_description m = 
-    protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, NO, YES);
+        protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, NO, YES);
+    if (m.name!=NULL)
+        return dg;
+    m = protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, YES, YES);
+    if (m.name!=NULL)
+        return dg;
+    m = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, NO, YES);
+    if (m.name!=NULL)
+        return dg;
+    m = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, YES, YES);
     if (m.name!=NULL)
         return dg;
     return nil;
@@ -191,6 +256,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                     self.objects = [aDecoder decodeObjectForKey:@"objects"];
                     self.currentPage = [aDecoder decodeIntegerForKey:@"currentPage"];
                     self.hasMorePages = [aDecoder decodeBoolForKey:@"hasMorePages"];
+                    self.requestingAnotherPage = [aDecoder decodeBoolForKey:@"requestingAnotherPage"];
                     break;
                     
                 default:
@@ -213,6 +279,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     [aCoder encodeObject:objects forKey:@"objects"];
     [aCoder encodeInteger:currentPage forKey:@"curentPage"];
     [aCoder encodeBool:hasMorePages forKey:@"hasMorePages"];
+    [aCoder encodeBool:requestingAnotherPage forKey:@"requestingAnotherPage"];
 }
 
 #pragma mark NSObject
@@ -230,10 +297,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"\"PMSTableViewSource\" : {\n\t\"objects\" : %@,\n\t\"currentPage\" : \"%ld\",\n\t\"hasMorePages\" : \"%@\"\n}",
+    return [NSString stringWithFormat:@"\"PMSTableViewSource\" : {\n\t\"objects\" : %@,\n\t\"currentPage\" : \"%ld\",\n\t\"hasMorePages\" : \"%@\"\n\t\"requestingAnotherPage\" : \"%@\"\n}",
             [self.objects description],
             self.currentPage,
-            (self.hasMorePages)?@"YES":@"NO"];
+            (self.hasMorePages)?@"YES":@"NO",
+            (self.requestingAnotherPage)?@"YES":@"NO"];
 }
 
 - (void)dealloc

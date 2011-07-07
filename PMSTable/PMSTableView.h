@@ -28,7 +28,7 @@
  *
  * If you are reading this, you have found some (very) beta, untested software. This is a complete rewrite of the old PMSTableViewController project. This rewrite uses a lot more Cocoa design patterns and will be much easier to use.
  */
-@interface PMSTableView : UITableView<UITableViewDelegate> {
+@interface PMSTableView : UITableView <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet id<PMSTableViewDelegate> dg;
     NSArray * dataSources;
     NSInteger loadThreshold;
@@ -100,5 +100,16 @@
  */
 - (void)setHasMorePages:(bool)morePages
               forSource:(NSUInteger)sourceId;
+
+/**
+ * Sets whether the given source is requesting another page.
+ *
+ * This is used to enable the loading indicator to be removed;
+ *
+ * @param requestingAnotherPage Whether or not the receiver is still in the process of requesting more data.
+ * @param sourceId The source for which this field is being set.
+ */
+- (void)setRequestingAnotherPage:(bool)requestingAnotherPage
+                       forSoruce:(NSUInteger)sourceId;
 
 @end
