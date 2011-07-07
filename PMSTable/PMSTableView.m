@@ -187,16 +187,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     // perform the logic of whether to load more data
     PMSTableViewSource * src = [dataSources objectAtIndex:section];
     
-    // if we use loading cells, add one
-    [self beginUpdates]; {
+    if ([src.objects count] - row < loadThreshold && src.hasMorePages) {
         
-        [self insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:section]
-                                                                                 inSection:section]]
-                    withRowAnimation:UITableViewRowAnimationTop];
+        // if we use loading cells, add one
+        [self beginUpdates]; {
+            
+            [self insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:section]
+                                                                                     inSection:section]]
+                        withRowAnimation:UITableViewRowAnimationTop];
+            
+        } [self endUpdates];
         
-    } [self endUpdates];
-    
-    if ([src.objects count] - row < loadThreshold && src.hasMorePages)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^{
                            [[dataSources objectAtIndex:section] setRequestingAnotherPage:YES];
@@ -204,6 +205,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                                fetchPage:src.currentPage+1
                                forSource:section];
                        });
+        
+    }
     // forward this message off to the delegate so that it can configure the cell if it needs to.
     if ([dg respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)])
         [dg tableView:tableView
