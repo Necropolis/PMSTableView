@@ -15,7 +15,7 @@
  *
  * Some methods from `UITableViewDelegate` may not be called.
  */
-@protocol PMSTableViewDelegate <UITableViewDelegate>
+@protocol PMSTableViewDelegate <UITableViewDelegate, UITableViewDataSource>
 
 @required
 

@@ -35,12 +35,46 @@
 
 - (void)addDataSourceAtIndex:(NSUInteger)idx
 {
-    NSLog(@"TODO: Add a data source!");
+    NSUInteger count = [dataSources count];
+    assert(idx<=count); // if idx==[dataSources count] then we just append a data source
+    
+    if (idx==count)
+        
+        self.dataSources = [dataSources arrayByAddingObject:[[PMSTableViewSource alloc] init]];
+        
+    else {
+        
+        NSMutableArray * arr = [[NSMutableArray alloc] initWithArray:[dataSources subarrayWithRange:NSMakeRange(0, (idx==0)?idx:idx-1)]];
+        [arr addObject:[[PMSTableViewSource alloc] init]];
+        [arr addObjectsFromArray:[dataSources subarrayWithRange:NSMakeRange(idx, count)]];
+        self.dataSources = [NSArray arrayWithArray:arr];
+        [arr release];
+        
+    }
+    
+    [self beginUpdates]; {
+        [self insertSections:[NSIndexSet indexSetWithIndex:idx]
+            withRowAnimation:UITableViewRowAnimationTop]; // change to Auto in iOS 5
+    } [self endUpdates];
+    
 }
 
 - (void)removeDataSourceAtIndex:(NSUInteger)idx
 {
-    NSLog(@"TODO: Remove a data soruce!");
+    assert(idx<[dataSources count]);
+    
+    NSArray * arr, * brr;
+    arr = [dataSources subarrayWithRange:NSMakeRange(0, idx-1)];
+    brr = [dataSources subarrayWithRange:NSMakeRange(idx+1, [dataSources count])];
+    self.dataSources = [arr arrayByAddingObjectsFromArray:brr];
+    // TODO: Potentially remove a section from a live table view
+    
+    [self beginUpdates]; {
+        
+        [self deleteSections:[NSIndexSet indexSetWithIndex:idx]
+            withRowAnimation:UITableViewRowAnimationTop];
+        
+    } [self endUpdates];
 }
 
 - (void)setData:(NSArray *)objects
