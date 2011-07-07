@@ -13,17 +13,18 @@
 #define kSerialVersionKey @"SVID"
 
 #define __iOS5Change // just a change-me for iOS5
+#define boolToSz(b) (b)?@"YES":@"NO"
 
 @interface PMSTableViewSource : NSObject<NSCoding> {
 @private
     NSArray * objects;
-    NSUInteger currentPage;
+    NSInteger currentPage;
     bool hasMorePages;
     bool requestingAnotherPage;
 }
 
 @property (readwrite, retain) NSArray * objects;
-@property (readwrite, assign) NSUInteger currentPage;
+@property (readwrite, assign) NSInteger currentPage;
 @property (readwrite, assign) bool hasMorePages;
 @property (readwrite, assign) bool requestingAnotherPage;
 
@@ -39,20 +40,16 @@
 {
     NSUInteger count = [dataSources count];
     assert(idx<=count); // if idx==[dataSources count] then we just append a data source
+#ifdef PSMDEBUG
+    NSLog(@"PMSTableView %@\n\taddDataSourceAtIndex:%u", self, idx);
+#endif
     
-    if (idx==count)
-        
-        self.dataSources = [dataSources arrayByAddingObject:[[PMSTableViewSource alloc] init]];
-        
-    else {
-        
-        NSMutableArray * arr = [[NSMutableArray alloc] initWithArray:[dataSources subarrayWithRange:NSMakeRange(0, (idx==0)?idx:idx-1)]];
-        [arr addObject:[[PMSTableViewSource alloc] init]];
-        [arr addObjectsFromArray:[dataSources subarrayWithRange:NSMakeRange(idx, count)]];
-        self.dataSources = [NSArray arrayWithArray:arr];
-        [arr release];
-        
-    }
+    PMSTableViewSource * p = [[[PMSTableViewSource alloc] init] autorelease];
+    NSMutableArray * arr = [[NSMutableArray alloc] initWithArray:dataSources];
+    [arr insertObject:p
+              atIndex:idx];
+    
+    self.dataSources = [NSArray arrayWithArray:arr];
     
     [self beginUpdates]; {
         
@@ -61,11 +58,17 @@
         
     } [self endUpdates];
     
+    [dg tableView:self
+        fetchPage:p.currentPage+1
+        forSource:idx];
 }
 
 - (void)removeDataSourceAtIndex:(NSUInteger)idx
 {
     assert(idx<[dataSources count]);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\tremoveDataSourceAtIndex:%u", self, idx);
+#endif
     
     NSArray * arr, * brr;
     arr = [dataSources subarrayWithRange:NSMakeRange(0, idx-1)];
@@ -82,10 +85,17 @@
 
 - (void)setData:(NSArray *)objects
       forSource:(NSUInteger)sourceId
-         onPage:(NSUInteger)currentPage
+         onPage:(NSInteger)currentPage
    hasMorePages:(bool)morePages
 {
     assert(sourceId<[dataSources count]);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\tsetData:%@\n\tforSource:%u\n\tonPage:%i\n\thasMorePages:%@",
+          self,
+          sourceId,
+          currentPage,
+          boolToSz(morePages));
+#endif
     
     if (useLoadingCells) {
         [self beginUpdates]; {
@@ -108,10 +118,17 @@
 
 - (void)addData:(NSArray *)objects
       forSource:(NSUInteger)sourceId
-         onPage:(NSUInteger)currentPage
+         onPage:(NSInteger)currentPage
    hasMorePages:(bool)morePages
 {
     assert(sourceId<[dataSources count]);
+#ifdef PMSDEUBG
+    NSLog(@"PMSTableView %@\n\taddData:%@\n\tforSource:%u\n\tonPage:%i\n\thasMorePages:%@",
+          self,
+          sourceId,
+          currentPage,
+          boolToSz(morePages));
+#endif
     
     if (useLoadingCells) {
         [self beginUpdates]; {
@@ -148,6 +165,10 @@
               forSource:(NSUInteger)sourceId
 {
     assert(sourceId<[dataSources count]);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\tsetHasMorePages:%@\n\tforSource:%u", self, boolToSz(morePages), sourceId);
+#endif
+    
     [[dataSources objectAtIndex:sourceId] setHasMorePages:morePages];
 }
 
@@ -155,6 +176,10 @@
                        forSoruce:(NSUInteger)sourceId
 {
     assert(sourceId<[dataSources count]);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\tsetRequestingAnotherPage:%@\n\tforSource:%u", self, boolToSz(requestingAnotherPage), sourceId);
+#endif
+    
     [[dataSources objectAtIndex:sourceId] setRequestingAnotherPage:requestingAnotherPage];
 }
 
@@ -229,6 +254,12 @@
     assert(tableView == self);
     NSInteger row=indexPath.row, section=indexPath.section;
     assert([self.dataSources count]>section);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\ttableView:%@\n\tcellForRowAtIndexPath:%@",
+          self,
+          tableView,
+          indexPath);
+#endif
     
     // is this for a title cell?
     if (useTitleCells && row == 0)
@@ -253,6 +284,9 @@ cellAsLoadingIndicatorForSource:section];
  numberOfRowsInSection:(NSInteger)section
 {
     assert(tableView == self);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableView %@\n\ttableView:%@\n\tnumberOfRowsInSection:%i", self, tableView, section);
+#endif
     
     PMSTableViewSource * p = [dataSources objectAtIndex:section];
     NSInteger rows = [[p objects] count];
@@ -272,12 +306,13 @@ cellAsLoadingIndicatorForSource:section];
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#ifdef PMSDEBUG
-    NSLog(@"__PMSTableViewDelegate(internal stuffs) tableView:willDisplayCell:forRowAtIndexPath: called with tableView %@ cell %@ and indexPath %@", tableView, cell, indexPath);
-#endif
     NSInteger row=indexPath.row, section=indexPath.section;
     assert(tableView == self); // if not, well, we got some big problems
     assert([self.dataSources count]>section);
+#ifdef PMSDEBUG
+    NSLog(@"__PMSTableViewDelegate(internal stuffs) tableView:willDisplayCell:forRowAtIndexPath: called with tableView %@ cell %@ and indexPath %@", tableView, cell, indexPath);
+#endif
+
     // perform the logic of whether to load more data
     PMSTableViewSource * src = [dataSources objectAtIndex:section];
     
@@ -398,8 +433,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     return [NSString stringWithFormat:@"\"PMSTableViewSource\" : {\n\t\"objects\" : %@,\n\t\"currentPage\" : \"%ld\",\n\t\"hasMorePages\" : \"%@\"\n\t\"requestingAnotherPage\" : \"%@\"\n}",
             [self.objects description],
             self.currentPage,
-            (self.hasMorePages)?@"YES":@"NO",
-            (self.requestingAnotherPage)?@"YES":@"NO"];
+            boolToSz(hasMorePages),
+            boolToSz(requestingAnotherPage)];
 }
 
 - (void)dealloc

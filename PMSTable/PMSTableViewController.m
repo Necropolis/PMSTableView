@@ -26,15 +26,20 @@
     assert(t==tableView);
     assert(page<kObjectsPerSection/kItemsPerPage+2); // ensure that we never ask for two pages beyond
     assert(sourceId<kNumberOfSections);
-    
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\tfetchPage:%u\n\tforSource:%u", t, page, sourceId);
+#endif
 }
 
 - (UITableViewCell *)tableView:(PMSTableView *)t
-                   cellForData:(id)data
+                   cellForData:(id)d
                     fromSource:(NSUInteger)sourceId
 {
     assert(t==tableView);
     assert(sourceId<kNumberOfSections);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\tcellForData:%@\n\tfromSource:%u", t, d, sourceId);
+#endif
     
     return nil;
 }
@@ -42,6 +47,9 @@
 - (bool)tableViewUsesTitleCells:(PMSTableView *)t
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableViewUsesTitleCells:%@", t);
+#endif
     
     return YES;
 }
@@ -49,6 +57,9 @@
 - (bool)tableViewUsesLoadingCells:(PMSTableView *)t
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableViewUsesLoadingCells:%@", t);
+#endif
     
     return YES;
 }
@@ -57,6 +68,9 @@
           cellAsTitleForSource:(NSUInteger)sourceId
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\tcellAsTitleForSource:%u", t, sourceId);
+#endif
     
     return nil;
 }
@@ -65,24 +79,43 @@
     headerTextForSource:(NSUInteger)sourceId
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\theaderTextForSource:%u", t, sourceId);
+#endif
     
-    return @"";
+    return [NSString stringWithFormat:@"Section Header %lu", sourceId+1];
 }
 
 - (NSString *)tableView:(PMSTableView *)t
     footerTextForSource:(NSUInteger)sourceId
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\tfooterTextForSource:%u", t, sourceId);
+#endif
     
-    return @"";
+    return [NSString stringWithFormat:@"Section Footer %lu", sourceId+1];
 }
 
  - (UITableViewCell *)tableView:(PMSTableView *)t
 cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
 {
     assert(t==tableView);
+#ifdef PMSDEBUG
+    NSLog(@"PMSTableViewController tableView:%@\n\tcellAsLoadingIndicatorForSource:%u", t, sourceId);
+#endif
     
     return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil; // never called
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0; // never called
 }
 
 #pragma mark NSObject
@@ -119,7 +152,8 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
             [brr addObject:[NSString stringWithFormat:@"Section %ld Row %ld", i+1, j+1]];
         [arr addObject:[NSArray arrayWithArray:brr]];
         [brr release];
-        [tableView addDataSourceAtIndex:i];
+        NSLog(@"Iterating?");
+        [tableView addDataSourceAtIndex:0];
     }
     self.data = [NSArray arrayWithArray:arr];
     [arr release];
@@ -127,8 +161,9 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
     [pool release];
     
     [super viewDidLoad];
-    
-    NSLog(@"Table View Delegate: %@", tableView.delegate);
+#ifdef PMSDEBUG
+    NSLog(@"Is this working?");
+#endif
 }
 
 

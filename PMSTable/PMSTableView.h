@@ -70,7 +70,7 @@
  */
 - (void)setData:(NSArray *)objects
       forSource:(NSUInteger)sourceId
-         onPage:(NSUInteger)currentPage
+         onPage:(NSInteger)currentPage
    hasMorePages:(bool)morePages;
 
 /**
@@ -87,7 +87,7 @@
  */
 - (void)addData:(NSArray *)objects
       forSource:(NSUInteger)sourceId
-         onPage:(NSUInteger)currentPage
+         onPage:(NSInteger)currentPage
    hasMorePages:(bool)morePages;
 
 /**
