@@ -85,7 +85,25 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    NSLog(@"TODO: Set the data  and set requestingAnotherPage to NO, and then animatedly remove all rows and then add them!");
+    assert(sourceId<[dataSources count]);
+    
+    if (useLoadingCells) {
+        [self beginUpdates]; {
+            
+            [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:sourceId]-1
+                                                                                     inSection:sourceId]]
+                        withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
+            
+        } [self endUpdates];
+    }
+    
+    PMSTableViewSource * p = [dataSources objectAtIndex:sourceId];
+    p.requestingAnotherPage = NO;
+    p.objects = objects;
+    p.currentPage = currentPage;
+    p.hasMorePages = morePages;
+    
+    [self reloadData];
 }
 
 - (void)addData:(NSArray *)objects
@@ -103,7 +121,6 @@
                         withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
         
         } [self endUpdates];
-        
     }
     
     PMSTableViewSource * p = [dataSources objectAtIndex:sourceId];
@@ -236,7 +253,16 @@ cellAsLoadingIndicatorForSource:section];
  numberOfRowsInSection:(NSInteger)section
 {
     assert(tableView == self);
-    return 0;
+    
+    PMSTableViewSource * p = [dataSources objectAtIndex:section];
+    NSInteger rows = [[p objects] count];
+    
+    if (p.requestingAnotherPage && useLoadingCells)
+        ++rows;
+    if (useTitleCells)
+        ++rows;
+    
+    return rows;
 }
 
 #pragma mark UITableViewDelegate
