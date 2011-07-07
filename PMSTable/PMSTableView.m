@@ -12,6 +12,8 @@
 #define kSerialVersionId 0
 #define kSerialVersionKey @"SVID"
 
+#define __iOS5Change // just a change-me for iOS5
+
 @interface PMSTableViewSource : NSObject<NSCoding> {
 @private
     NSArray * objects;
@@ -53,8 +55,10 @@
     }
     
     [self beginUpdates]; {
+        
         [self insertSections:[NSIndexSet indexSetWithIndex:idx]
-            withRowAnimation:UITableViewRowAnimationTop]; // change to Auto in iOS 5
+            withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
+        
     } [self endUpdates];
     
 }
@@ -67,12 +71,11 @@
     arr = [dataSources subarrayWithRange:NSMakeRange(0, idx-1)];
     brr = [dataSources subarrayWithRange:NSMakeRange(idx+1, [dataSources count])];
     self.dataSources = [arr arrayByAddingObjectsFromArray:brr];
-    // TODO: Potentially remove a section from a live table view
     
     [self beginUpdates]; {
         
         [self deleteSections:[NSIndexSet indexSetWithIndex:idx]
-            withRowAnimation:UITableViewRowAnimationTop];
+            withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
         
     } [self endUpdates];
 }
@@ -90,7 +93,38 @@
          onPage:(NSUInteger)currentPage
    hasMorePages:(bool)morePages
 {
-    NSLog(@"TODO: Add the data and set requestingAnotherPage to NO, and then animatedly add more rows to the table!");
+    assert(sourceId<[dataSources count]);
+    
+    if (useLoadingCells) {
+        [self beginUpdates]; {
+        
+            [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:sourceId]-1
+                                                                                     inSection:sourceId]]
+                        withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
+        
+        } [self endUpdates];
+        
+    }
+    
+    PMSTableViewSource * p = [dataSources objectAtIndex:sourceId];
+    p.requestingAnotherPage = NO;
+    p.objects = [p.objects arrayByAddingObjectsFromArray:objects];
+    p.currentPage = currentPage;
+    p.hasMorePages = morePages;
+    
+    [self beginUpdates]; {
+        
+        NSMutableArray * arr = [[NSMutableArray alloc] initWithCapacity:[objects count]];
+        
+        // Populate arr with all the index paths for the data
+        for (NSUInteger i=0; i<[objects count]; ++i)
+            [arr addObject:[NSIndexPath indexPathForRow:[self numberOfRowsInSection:sourceId]
+                                              inSection:sourceId]];
+        
+        [self insertRowsAtIndexPaths:arr // should cause the table to go to the delegates to configure the cells
+                    withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
+        
+    } [self endUpdates];
 }
 
 - (void)setHasMorePages:(bool)morePages
