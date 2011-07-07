@@ -1,0 +1,768 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>PMSTableView Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0.4 (build 702)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">PMSTableView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/dg">&nbsp;&nbsp;&nbsp;&nbsp;dg</option>
+	
+	<option value="//api/name/loadThreshold">&nbsp;&nbsp;&nbsp;&nbsp;loadThreshold</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/addData:forSource:onPage:hasMorePages:">&nbsp;&nbsp;&nbsp;&nbsp;- addData:forSource:onPage:hasMorePages:</option>
+	
+	<option value="//api/name/addDataSourceAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- addDataSourceAtIndex:</option>
+	
+	<option value="//api/name/removeDataSourceAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- removeDataSourceAtIndex:</option>
+	
+	<option value="//api/name/setData:forSource:onPage:hasMorePages:">&nbsp;&nbsp;&nbsp;&nbsp;- setData:forSource:onPage:hasMorePages:</option>
+	
+	<option value="//api/name/setHasMorePages:forSource:">&nbsp;&nbsp;&nbsp;&nbsp;- setHasMorePages:forSource:</option>
+	
+	<option value="//api/name/setRequestingAnotherPage:forSoruce:">&nbsp;&nbsp;&nbsp;&nbsp;- setRequestingAnotherPage:forSoruce:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dg">dg</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadThreshold">loadThreshold</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addData:forSource:onPage:hasMorePages:">addData:forSource:onPage:hasMorePages:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addDataSourceAtIndex:">addDataSourceAtIndex:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeDataSourceAtIndex:">removeDataSourceAtIndex:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setData:forSource:onPage:hasMorePages:">setData:forSource:onPage:hasMorePages:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setHasMorePages:forSource:">setHasMorePages:forSource:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setRequestingAnotherPage:forSoruce:">setRequestingAnotherPage:forSoruce:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="PMSTableView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">PMSTableView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UITableView</td>
+</tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">UITableViewDataSource<br />UITableViewDelegate</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">PMSTableView.h<br />PMSTableView.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Automates the logic of when to fetch and show new content from one or more sources of paginated data.</p>
+
+<p>This is a light wrapper on top of <code>UITableView</code> that controls the logic of obtaining data from sources. It is built to prevent the programmer from having to write custom logic each and every time he or she desires to populate the contents of a <code>UITableView</code> with such data. This data is usually loaded from network data, which incurs a degree of latency. The nature of PMSTableView&rsquo;s callbacks enable the interface to not block while retrieving more data.</p>
+
+<p>To use this class, add a new <code>UITableView</code> to your XIB, and then set the subclass to <a href="PMSTableView.html">PMSTableView</a>. Do not alter the delegate or data source, or you will be bypassing the functionality of <a href="PMSTableView.html">PMSTableView</a>.</p>
+
+<p><strong>Note:</strong> I am planning on using some method swizzling in the future to make it so that this is no longer a requirement, since it rather prevents you from listening for selection events.</p>
+
+<p>You need to implement the protocol <a href="../Protocols/PMSTableViewDelegate.html">PMSTableViewDelegate</a>. <a href="PMSTableView.html">PMSTableView</a> will call <a href="#//api/name/dg">dg</a> to request more data and to get cells to add to the table.</p>
+
+<p>To some it might seem strange to have an infinite scrolling device with more than one section. If the first section is especially long, it could take a while for the customer to scroll down to the second section in low-latency situations. I am fully aware of this potential problem, and it is a thing for the programmer to  think about. There are situations in which there are smaller sections which you want to be put first, with the longer section infinitely-scrolling at the bottom.</p>
+
+<p>Finally, although this tool supports multiple data sources, you do not have to use more than one if you don&rsquo;t want to.</p>
+
+<p><a href="PMSTableView.html">PMSTableView</a> should be thread-safe. It supports keyed archiving, so you can load it from NIBs without loosing your IB customizations.</p>
+
+<p>If you are reading this, you have found some (very) beta, untested software. This is a complete rewrite of the old <a href="../Classes/PMSTableViewController.html">PMSTableViewController</a> project. This rewrite uses a lot more Cocoa design patterns and will be much easier to use.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dg">&nbsp;&nbsp;dg</a></code>
+		<span class="tooltip"><p>The delegate to which requests for more data or content cells is sent.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadThreshold">&nbsp;&nbsp;loadThreshold</a></code>
+		<span class="tooltip"><p>How soon should the <a href="PMSTableView.html">PMSTableView</a> re-query for more elements?</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addDataSourceAtIndex:">&ndash;&nbsp;addDataSourceAtIndex:</a></code>
+		<span class="tooltip"><p>Insert a data source into the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeDataSourceAtIndex:">&ndash;&nbsp;removeDataSourceAtIndex:</a></code>
+		<span class="tooltip"><p>Removes a data source from the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setData:forSource:onPage:hasMorePages:">&ndash;&nbsp;setData:forSource:onPage:hasMorePages:</a></code>
+		<span class="tooltip"><p>Sets all the data in the receiver for the given source. Generally you will not be using this; see <a href="#//api/name/addData:forSource:onPage:hasMorePages:">addData:forSource:onPage:hasMorePages:</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addData:forSource:onPage:hasMorePages:">&ndash;&nbsp;addData:forSource:onPage:hasMorePages:</a></code>
+		<span class="tooltip"><p>Adds more data to the receiver for the given source.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setHasMorePages:forSource:">&ndash;&nbsp;setHasMorePages:forSource:</a></code>
+		<span class="tooltip"><p>Sets whether the given source has more data to retrieve.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setRequestingAnotherPage:forSoruce:">&ndash;&nbsp;setRequestingAnotherPage:forSoruce:</a></code>
+		<span class="tooltip"><p>Sets whether the given source is requesting another page.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/dg" title="dg"></a>
+	<h3 class="subsubtitle method-title">dg</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The delegate to which requests for more data or content cells is sent.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) IBOutlet id&lt;PMSTableViewDelegate&gt; dg</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The delegate to which requests for more data or content cells is sent.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadThreshold" title="loadThreshold"></a>
+	<h3 class="subsubtitle method-title">loadThreshold</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>How soon should the <a href="PMSTableView.html">PMSTableView</a> re-query for more elements?</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) NSInteger loadThreshold</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>How soon should the <a href="PMSTableView.html">PMSTableView</a> re-query for more elements?</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/addData:forSource:onPage:hasMorePages:" title="addData:forSource:onPage:hasMorePages:"></a>
+	<h3 class="subsubtitle method-title">addData:forSource:onPage:hasMorePages:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Adds more data to the receiver for the given source.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)addData:(NSArray *)<em>objects</em> forSource:(NSUInteger)<em>sourceId</em> onPage:(NSUInteger)<em>currentPage</em> hasMorePages:(bool)<em>morePages</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>objects</em></dt>
+			<dd><p>The data to put into the data source.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sourceId</em></dt>
+			<dd><p>The source from which this data was extracted.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>currentPage</em></dt>
+			<dd><p>The &ldquo;page&rdquo; from which you retrieved this data.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>morePages</em></dt>
+			<dd><p>Whether or not the receiver will re-query this data source when and if the user scrolls down to the end of the section.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Adds more data to the receiver for the given source.</p>
+
+<p>This is the method you will call after you have retrieved more data after having been notified by <a href="../Protocols/PMSTableViewDelegate.html#//api/name/tableView:fetchPage:forSource:">[PMSTableViewDelegate tableView:fetchPage:forSource:]</a>. Following this, if the applicable part of the PMSTableView is still visible to the customer, then PMSTableView will call your code&rsquo;s <a href="../Protocols/PMSTableViewDelegate.html#//api/name/tableView:cellForData:fromSource:">[PMSTableViewDelegate tableView:cellForData:fromSource:]</a> method in order to obtain a <code>UITableViewCell</code> to put into the table.</p>
+
+<p>The data that you add is never inspected by <a href="PMSTableView.html">PMSTableView</a>, except maybe for debug output. You can put any arbitrary value into the array that you can store into an <code>NSArray</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addDataSourceAtIndex:" title="addDataSourceAtIndex:"></a>
+	<h3 class="subsubtitle method-title">addDataSourceAtIndex:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Insert a data source into the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)addDataSourceAtIndex:(NSUInteger)<em>idx</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>idx</em></dt>
+			<dd><p>Insert a data source.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Insert a data source into the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeDataSourceAtIndex:" title="removeDataSourceAtIndex:"></a>
+	<h3 class="subsubtitle method-title">removeDataSourceAtIndex:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes a data source from the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeDataSourceAtIndex:(NSUInteger)<em>idx</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>idx</em></dt>
+			<dd><p>Remove the given data source.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Removes a data source from the receiver. This is used for dynamically changing the number of sections in the <code>UITableView</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setData:forSource:onPage:hasMorePages:" title="setData:forSource:onPage:hasMorePages:"></a>
+	<h3 class="subsubtitle method-title">setData:forSource:onPage:hasMorePages:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets all the data in the receiver for the given source. Generally you will not be using this; see <a href="#//api/name/addData:forSource:onPage:hasMorePages:">addData:forSource:onPage:hasMorePages:</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setData:(NSArray *)<em>objects</em> forSource:(NSUInteger)<em>sourceId</em> onPage:(NSUInteger)<em>currentPage</em> hasMorePages:(bool)<em>morePages</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>objects</em></dt>
+			<dd><p>The data to be set.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sourceId</em></dt>
+			<dd><p>The source to be overwritten.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>currentPage</em></dt>
+			<dd><p>The &ldquo;page&rdquo; from which you retrieved this data.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>morePages</em></dt>
+			<dd><p>Whether or not the receiver will re-query this data source when and if the user scrolls down to the end of the section.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets all the data in the receiver for the given source. Generally you will not be using this; see <a href="#//api/name/addData:forSource:onPage:hasMorePages:">addData:forSource:onPage:hasMorePages:</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setHasMorePages:forSource:" title="setHasMorePages:forSource:"></a>
+	<h3 class="subsubtitle method-title">setHasMorePages:forSource:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets whether the given source has more data to retrieve.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setHasMorePages:(bool)<em>morePages</em> forSource:(NSUInteger)<em>sourceId</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>morePages</em></dt>
+			<dd><p>Whether or not the receiver will re-query this data soruce when and if the user scrolls down to the end of the section.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sourceId</em></dt>
+			<dd><p>The source for which there is no more data.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets whether the given source has more data to retrieve.</p>
+
+<p>If there is a situation in which you cannot know how many pages there are from a source, the best solution is to always tell <a href="PMSTableView.html">PMSTableView</a> that there are more pages. When your source runs out of pages, instead of potentially leaving an indeterminate spinner in the view indefinitely, instead call this method with a <code>morePages</code> parameter of <code>NO</code>. This method will remove any applicable loading indicator and will flag the source as to not be queried for additional data again. Calling the same with <code>YES</code> will re-enable the data source to be queried for more data in the future or immediately if the end of the view has been reached by the customer.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setRequestingAnotherPage:forSoruce:" title="setRequestingAnotherPage:forSoruce:"></a>
+	<h3 class="subsubtitle method-title">setRequestingAnotherPage:forSoruce:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets whether the given source is requesting another page.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setRequestingAnotherPage:(bool)<em>requestingAnotherPage</em> forSoruce:(NSUInteger)<em>sourceId</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>requestingAnotherPage</em></dt>
+			<dd><p>Whether or not the receiver is still in the process of requesting more data.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sourceId</em></dt>
+			<dd><p>The source for which this field is being set.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets whether the given source is requesting another page.</p>
+
+<p>This is used to enable the loading indicator to be removed;</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMSTableView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2011 Firestorm Development. All rights reserved. (Last updated: 2011-07-07)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 702)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
