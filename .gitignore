@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+build
+*.mode[123]v3
+*.pbxuser
+*.DS_Store
+*.xcworkspace
+xcuserdata
+=======
+.DS_Store
+project.xcworkspace
+xcuserdata
+docs
+>>>>>>> 4c3d0a620e885f62a31e11a398f9e2a7881f2fc3
