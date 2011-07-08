@@ -45,6 +45,8 @@
  * How soon should the PMSTableView re-query for more elements?
  */
 @property (readwrite, assign) NSInteger loadThreshold;
+@property (readwrite, assign) bool useTitleCells;
+@property (readwrite, assign) bool useLoadingCells;
 
 /**
  * Insert a data source into the receiver. This is used for dynamically changing the number of sections in the `UITableView`.

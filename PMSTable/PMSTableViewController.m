@@ -12,6 +12,10 @@
 #define kObjectsPerSection 40
 #define kItemsPerPage 8
 
+#define kDataCellReuseId @"Data Cell"
+#define kTitleCellReuseId @"Title Cell"
+#define kLoadingCellReuseId @"Loading Cell"
+
 @implementation PMSTableViewController
 
 @synthesize tableView;
@@ -29,6 +33,16 @@
 #ifdef PMSDEBUG
     NSLog(@"PMSTableViewController tableView:%@\n\tfetchPage:%u\n\tforSource:%u", t, page, sourceId);
 #endif
+    
+    [NSThread sleepForTimeInterval:5.0f];
+    
+    NSArray * d = [data objectAtIndex:sourceId];
+    NSArray * dsub = [d subarrayWithRange:NSMakeRange(page * kItemsPerPage, kItemsPerPage)];
+    
+    [t addData:dsub
+     forSource:sourceId
+        onPage:page
+  hasMorePages:(page * kItemsPerPage + kItemsPerPage >= kObjectsPerSection)];
 }
 
 - (UITableViewCell *)tableView:(PMSTableView *)t
@@ -41,7 +55,15 @@
     NSLog(@"PMSTableViewController tableView:%@\n\tcellForData:%@\n\tfromSource:%u", t, d, sourceId);
 #endif
     
-    return nil;
+    UITableViewCell * c = [t dequeueReusableCellWithIdentifier:kDataCellReuseId];
+    
+    if (!c)
+        c = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:kDataCellReuseId] autorelease];
+    
+    [[c textLabel] setText:d];
+    
+    return c;
 }
 
 - (bool)tableViewUsesTitleCells:(PMSTableView *)t
@@ -72,7 +94,15 @@
     NSLog(@"PMSTableViewController tableView:%@\n\tcellAsTitleForSource:%u", t, sourceId);
 #endif
     
-    return nil;
+    UITableViewCell * c = [t dequeueReusableCellWithIdentifier:kTitleCellReuseId];
+    
+    if (!c)
+        c = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                    reuseIdentifier:kTitleCellReuseId] autorelease];
+    
+    [[c textLabel] setText:[NSString stringWithFormat:@"Section %u", sourceId]];
+    
+    return c;
 }
 
 - (NSString *)tableView:(PMSTableView *)t
@@ -105,7 +135,15 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
     NSLog(@"PMSTableViewController tableView:%@\n\tcellAsLoadingIndicatorForSource:%u", t, sourceId);
 #endif
     
-    return nil;
+    UITableViewCell * c = [t dequeueReusableCellWithIdentifier:kLoadingCellReuseId];
+    
+    if (!c)
+        c = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:kLoadingCellReuseId] autorelease];
+             
+    [[c contentView] addSubview:[[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease]];
+    
+    return c;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,6 +179,8 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
     // set up with some example data
@@ -153,14 +193,15 @@ cellAsLoadingIndicatorForSource:(NSUInteger)sourceId
         [arr addObject:[NSArray arrayWithArray:brr]];
         [brr release];
         NSLog(@"Iterating?");
-        [tableView addDataSourceAtIndex:0];
+        [tableView addDataSourceAtIndex:i];
     }
     self.data = [NSArray arrayWithArray:arr];
     [arr release];
     
+    [self.tableView reloadData];
+    
     [pool release];
     
-    [super viewDidLoad];
 #ifdef PMSDEBUG
     NSLog(@"Is this working?");
 #endif

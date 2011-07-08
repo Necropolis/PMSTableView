@@ -35,6 +35,8 @@
 @synthesize dg;
 @synthesize dataSources;
 @synthesize loadThreshold;
+@synthesize useTitleCells;
+@synthesize useLoadingCells;
 
 - (void)addDataSourceAtIndex:(NSUInteger)idx
 {
@@ -59,7 +61,7 @@
     } [self endUpdates];
     
     [dg tableView:self
-        fetchPage:p.currentPage+1
+        fetchPage:0
         forSource:idx];
 }
 
@@ -92,6 +94,7 @@
 #ifdef PMSDEBUG
     NSLog(@"PMSTableView %@\n\tsetData:%@\n\tforSource:%u\n\tonPage:%i\n\thasMorePages:%@",
           self,
+          objects,
           sourceId,
           currentPage,
           boolToSz(morePages));
@@ -310,7 +313,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     assert(tableView == self); // if not, well, we got some big problems
     assert([self.dataSources count]>section);
 #ifdef PMSDEBUG
-    NSLog(@"__PMSTableViewDelegate(internal stuffs) tableView:willDisplayCell:forRowAtIndexPath: called with tableView %@ cell %@ and indexPath %@", tableView, cell, indexPath);
+    NSLog(@"PMSTableView %@\n\ttableView:%@\n\twillDisplayCell:%@\n\tforRowAtIndexPath:%@",
+          self,
+          tableView,
+          cell,
+          indexPath);
 #endif
 
     // perform the logic of whether to load more data
@@ -364,6 +371,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     if (m.name!=NULL)
         return dg;
     return nil;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"PMSTableView : {\n\tloadThreshold : %i,\n\tdelegate : {%@}\n\tdataSources : {%@}\n}",
+            loadThreshold,
+            dg,
+            dataSources];
 }
 
 @end
