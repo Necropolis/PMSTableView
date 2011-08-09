@@ -53,16 +53,17 @@
     
     self.dataSources = [NSArray arrayWithArray:arr];
     
-    [self beginUpdates]; {
+    [dg tableView:self
+        fetchPage:0
+        forSource:idx];
+    
+//    [self beginUpdates]; {
         
         [self insertSections:[NSIndexSet indexSetWithIndex:idx]
             withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
         
-    } [self endUpdates];
-    
-    [dg tableView:self
-        fetchPage:0
-        forSource:idx];
+//    } [self endUpdates];
+
 }
 
 - (void)removeDataSourceAtIndex:(NSUInteger)idx
@@ -77,12 +78,12 @@
     brr = [dataSources subarrayWithRange:NSMakeRange(idx+1, [dataSources count])];
     self.dataSources = [arr arrayByAddingObjectsFromArray:brr];
     
-    [self beginUpdates]; {
+//    [self beginUpdates]; {
         
         [self deleteSections:[NSIndexSet indexSetWithIndex:idx]
             withRowAnimation:UITableViewRowAnimationTop __iOS5Change];
         
-    } [self endUpdates];
+//    } [self endUpdates];
 }
 
 - (void)setData:(NSArray *)objects

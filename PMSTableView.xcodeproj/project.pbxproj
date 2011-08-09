@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA6E190013F18D1D00F8AF85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB49EDD13BCE51C00183C2C /* Foundation.framework */; };
+		DA6E190A13F18D6100F8AF85 /* PMSTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB49F1413BCE5C200183C2C /* PMSTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA6E190B13F18D6600F8AF85 /* PMSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB49F1513BCE5C200183C2C /* PMSTableView.m */; };
+		DA6E190C13F18D6900F8AF85 /* PMSTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB49F1713BCE9A200183C2C /* PMSTableViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAB49EDC13BCE51C00183C2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB49EDB13BCE51C00183C2C /* UIKit.framework */; };
 		DAB49EDE13BCE51C00183C2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB49EDD13BCE51C00183C2C /* Foundation.framework */; };
 		DAB49EE013BCE51C00183C2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB49EDF13BCE51C00183C2C /* CoreGraphics.framework */; };
@@ -36,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA6E18FF13F18D1D00F8AF85 /* libPMSTableView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPMSTableView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA6E190313F18D1D00F8AF85 /* PMSTableView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PMSTableView-Prefix.pch"; sourceTree = "<group>"; };
 		DAB49ED713BCE51C00183C2C /* PMSTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PMSTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB49EDB13BCE51C00183C2C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DAB49EDD13BCE51C00183C2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +68,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA6E18FC13F18D1D00F8AF85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA6E190013F18D1D00F8AF85 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAB49ED413BCE51C00183C2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,10 +99,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA6E190113F18D1D00F8AF85 /* PMSTableView */ = {
+			isa = PBXGroup;
+			children = (
+				DAB49F1413BCE5C200183C2C /* PMSTableView.h */,
+				DAB49F1513BCE5C200183C2C /* PMSTableView.m */,
+				DAB49F1713BCE9A200183C2C /* PMSTableViewDelegate.h */,
+				DA6E190213F18D1D00F8AF85 /* Supporting Files */,
+			);
+			name = PMSTableView;
+			path = PMSTable;
+			sourceTree = "<group>";
+		};
+		DA6E190213F18D1D00F8AF85 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA6E190313F18D1D00F8AF85 /* PMSTableView-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DAB49ECC13BCE51C00183C2C = {
 			isa = PBXGroup;
 			children = (
-				DAB49EE113BCE51C00183C2C /* PMSTable */,
+				DA6E190113F18D1D00F8AF85 /* PMSTableView */,
+				DAB49EE113BCE51C00183C2C /* PMSTableView-Sample */,
 				DAB49F0113BCE51D00183C2C /* PMSTableTests */,
 				DAB49EDA13BCE51C00183C2C /* Frameworks */,
 				DAB49ED813BCE51C00183C2C /* Products */,
@@ -100,6 +135,7 @@
 			children = (
 				DAB49ED713BCE51C00183C2C /* PMSTableView.app */,
 				DAB49EFB13BCE51D00183C2C /* PMSTableViewTests.octest */,
+				DA6E18FF13F18D1D00F8AF85 /* libPMSTableView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,7 +150,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DAB49EE113BCE51C00183C2C /* PMSTable */ = {
+		DAB49EE113BCE51C00183C2C /* PMSTableView-Sample */ = {
 			isa = PBXGroup;
 			children = (
 				DAB49EEA13BCE51C00183C2C /* PMSTableAppDelegate.h */,
@@ -123,9 +159,9 @@
 				DAB49EF013BCE51C00183C2C /* PMSTableViewController.h */,
 				DAB49EF113BCE51C00183C2C /* PMSTableViewController.m */,
 				DAB49EF313BCE51C00183C2C /* PMSTableViewController.xib */,
-				DAB49F1813BCE9D300183C2C /* PMSTableView */,
 				DAB49EE213BCE51C00183C2C /* Supporting Files */,
 			);
+			name = "PMSTableView-Sample";
 			path = PMSTable;
 			sourceTree = "<group>";
 		};
@@ -160,22 +196,41 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DAB49F1813BCE9D300183C2C /* PMSTableView */ = {
-			isa = PBXGroup;
-			children = (
-				DAB49F1413BCE5C200183C2C /* PMSTableView.h */,
-				DAB49F1513BCE5C200183C2C /* PMSTableView.m */,
-				DAB49F1713BCE9A200183C2C /* PMSTableViewDelegate.h */,
-			);
-			name = PMSTableView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DA6E18FD13F18D1D00F8AF85 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA6E190A13F18D6100F8AF85 /* PMSTableView.h in Headers */,
+				DA6E190C13F18D6900F8AF85 /* PMSTableViewDelegate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		DAB49ED613BCE51C00183C2C /* PMSTableView */ = {
+		DA6E18FE13F18D1D00F8AF85 /* PMSTableView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DAB49F0E13BCE51D00183C2C /* Build configuration list for PBXNativeTarget "PMSTableView" */;
+			buildConfigurationList = DA6E190713F18D1D00F8AF85 /* Build configuration list for PBXNativeTarget "PMSTableView" */;
+			buildPhases = (
+				DA6E18FB13F18D1D00F8AF85 /* Sources */,
+				DA6E18FC13F18D1D00F8AF85 /* Frameworks */,
+				DA6E18FD13F18D1D00F8AF85 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PMSTableView;
+			productName = PMSTableView;
+			productReference = DA6E18FF13F18D1D00F8AF85 /* libPMSTableView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DAB49ED613BCE51C00183C2C /* PMSTableView-Sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB49F0E13BCE51D00183C2C /* Build configuration list for PBXNativeTarget "PMSTableView-Sample" */;
 			buildPhases = (
 				DAB49ED313BCE51C00183C2C /* Sources */,
 				DAB49ED413BCE51C00183C2C /* Frameworks */,
@@ -185,7 +240,7 @@
 			);
 			dependencies = (
 			);
-			name = PMSTableView;
+			name = "PMSTableView-Sample";
 			productName = PMSTable;
 			productReference = DAB49ED713BCE51C00183C2C /* PMSTableView.app */;
 			productType = "com.apple.product-type.application";
@@ -229,8 +284,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DAB49ED613BCE51C00183C2C /* PMSTableView */,
+				DAB49ED613BCE51C00183C2C /* PMSTableView-Sample */,
 				DAB49EFA13BCE51D00183C2C /* PMSTableViewTests */,
+				DA6E18FE13F18D1D00F8AF85 /* PMSTableView */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +330,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA6E18FB13F18D1D00F8AF85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA6E190B13F18D6600F8AF85 /* PMSTableView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAB49ED313BCE51C00183C2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,7 +362,7 @@
 /* Begin PBXTargetDependency section */
 		DAB49F0013BCE51D00183C2C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DAB49ED613BCE51C00183C2C /* PMSTableView */;
+			target = DAB49ED613BCE51C00183C2C /* PMSTableView-Sample */;
 			targetProxy = DAB49EFF13BCE51D00183C2C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -339,6 +403,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DA6E190813F18D1D00F8AF85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/PMSTableView.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PMSTableView/PMSTableView-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DA6E190913F18D1D00F8AF85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/PMSTableView.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PMSTableView/PMSTableView-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		DAB49F0C13BCE51D00183C2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -449,6 +553,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA6E190713F18D1D00F8AF85 /* Build configuration list for PBXNativeTarget "PMSTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA6E190813F18D1D00F8AF85 /* Debug */,
+				DA6E190913F18D1D00F8AF85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DAB49ED113BCE51C00183C2C /* Build configuration list for PBXProject "PMSTableView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -458,7 +570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DAB49F0E13BCE51D00183C2C /* Build configuration list for PBXNativeTarget "PMSTableView" */ = {
+		DAB49F0E13BCE51D00183C2C /* Build configuration list for PBXNativeTarget "PMSTableView-Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DAB49F0F13BCE51D00183C2C /* Debug */,
